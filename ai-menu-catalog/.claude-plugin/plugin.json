@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "ai-menu-catalog",
+  "displayName": "AI Menu Catalog",
+  "description": "Search cafes, menus and prices in Bishkek — free, no login required.",
+  "version": "0.1.0",
+  "author": {
+    "name": "menu-corp",
+    "url": "https://github.com/menu-corp"
+  },
+  "homepage": "https://menu.qr.kg",
+  "repository": "https://github.com/menu-corp/ai-menu-plugins",
+  "license": "MIT",
+  "keywords": [
+    "qr-menu",
+    "cafe",
+    "bishkek",
+    "kgs",
+    "catalog",
+    "search",
+    "mcp"
+  ],
+  "defaultEnabled": false
+}

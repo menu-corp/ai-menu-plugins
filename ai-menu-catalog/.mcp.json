@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ai-menu-catalog": {
+      "type": "http",
+      "url": "https://catalog-menu.qr.kg/mcp"
+    }
+  }
+}

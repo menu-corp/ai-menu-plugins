@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "ai-menu-manager": {
+      "type": "streamable-http",
+      "url": "https://mcp-menu.qr.kg/mcp"
+    }
+  }
+}

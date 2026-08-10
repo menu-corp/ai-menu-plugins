@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ai-menu-manager": {
+      "type": "http",
+      "url": "https://mcp-menu.qr.kg/mcp"
+    }
+  }
+}

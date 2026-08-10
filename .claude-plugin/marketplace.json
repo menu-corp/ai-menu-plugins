@@ -1,0 +1,22 @@
+{
+  "name": "ai-menu-plugins",
+  "owner": {
+    "name": "menu-corp",
+    "url": "https://github.com/menu-corp"
+  },
+  "description": "Plugins for menu.qr.kg — search published café menus in Bishkek, or manage your own.",
+  "plugins": [
+    {
+      "name": "ai-menu-catalog",
+      "source": "./ai-menu-catalog",
+      "description": "Search cafes, menus and prices in Bishkek — free, no login required.",
+      "category": "productivity"
+    },
+    {
+      "name": "ai-menu-manager",
+      "source": "./ai-menu-manager",
+      "description": "Manage your Bishkek café's QR menu from an AI assistant: locations, menus, items, prices.",
+      "category": "productivity"
+    }
+  ]
+}

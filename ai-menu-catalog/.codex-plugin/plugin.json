@@ -1,0 +1,12 @@
+{
+  "name": "ai-menu-catalog",
+  "version": "0.1.0",
+  "description": "Search cafes, menus and prices in Bishkek — free, no login required.",
+  "author": {
+    "name": "menu-corp",
+    "url": "https://github.com/menu-corp"
+  },
+  "homepage": "https://menu.qr.kg",
+  "license": "MIT",
+  "skills": "./skills/"
+}

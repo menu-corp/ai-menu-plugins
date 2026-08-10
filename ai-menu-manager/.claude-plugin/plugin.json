@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "ai-menu-manager",
+  "displayName": "AI Menu Manager",
+  "description": "Manage your Bishkek café's QR menu from an AI assistant: locations, menus, items, prices.",
+  "version": "0.1.0",
+  "author": {
+    "name": "menu-corp",
+    "url": "https://github.com/menu-corp"
+  },
+  "homepage": "https://menu.qr.kg",
+  "repository": "https://github.com/menu-corp/ai-menu-plugins",
+  "license": "MIT",
+  "keywords": [
+    "qr-menu",
+    "cafe",
+    "bishkek",
+    "kgs",
+    "menu-management",
+    "mcp"
+  ],
+  "defaultEnabled": false
+}
