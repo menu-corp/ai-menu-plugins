@@ -14,6 +14,8 @@ Talking to Claude with this plugin enabled, you can:
 - see your locations, menus, categories and items, and check onboarding
   status;
 - add a new location or menu, edit a location's hours/contacts/description;
+- show or hide a menu for guests and choose which one opens first (menus
+  are tabs on your location's public page);
 - add, edit, and reorder categories and items;
 - change a price, mark an item in/out of stock (soft stop-list — the dish
   stays in your data, it just stops showing to customers);
@@ -26,12 +28,13 @@ Full tool-by-tool guidance lives in
 
 Most of what this plugin does is a **write**: a price change, a new item, or
 a stop-list flip goes out to your public menu page immediately, to real
-customers — there is no draft/review step beyond a menu's own optional
-`draft` status. Granting this plugin access to your account is granting it
-permission to change what your customers see and pay, not just to read your
-data. Claude will confirm the specific change (which item, old value → new
-value) before calling a write tool, but the account-level access itself is
-all-or-nothing: there's no way to install this plugin as read-only.
+customers — there is no draft/review step beyond a menu's own `draft`
+status (a new menu starts hidden until you show it). Granting this plugin
+access to your account is granting it permission to change what your
+customers see and pay, not just to read your data. Claude will confirm the
+specific change (which item, old value → new value) before calling a write
+tool, but the account-level access itself is all-or-nothing: there's no way
+to install this plugin as read-only.
 
 Every price you send or read is **whole Kyrgyzstani som (KGS)**, e.g.
 `"180.00"` for 180 som — never smaller units.
@@ -59,8 +62,8 @@ Every price you send or read is **whole Kyrgyzstani som (KGS)**, e.g.
   it operates in your account's scope only, resolved from your OAuth login,
   never a company/location you don't own.
 - There is no delete tool for any resource; "removing" something means
-  marking it out of stock (items) or superseding it (e.g. `set_default_menu`
-  for menus) — nothing is erased.
+  marking it out of stock (items) or hiding it (menus: `update_menu` with
+  status `draft` or `disabled`) — nothing is erased.
 - Prices, availability and menu contents reflect what's published *right
   now*; this plugin has no memory of "what it used to say" beyond what you
   ask it to change.

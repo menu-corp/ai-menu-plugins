@@ -1,6 +1,6 @@
 {
   "name": "ai-menu-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Manage your Bishkek café's QR menu from an AI assistant: locations, menus, items, prices.",
   "author": {
     "name": "menu-corp",

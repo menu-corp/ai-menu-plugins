@@ -31,7 +31,8 @@ account (there isn't one to tie it to).
 
 Only **published** menus show up. A location, menu, or business that's
 inactive, disabled, in draft, or deleted never appears in a search or
-fetch result — if nothing comes back, the venue may simply not have a menu
+fetch result, and neither does an empty menu or a location with no menu
+to show — if nothing comes back, the venue may simply not have a menu
 published right now.
 
 ## Install

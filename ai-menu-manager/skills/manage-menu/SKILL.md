@@ -6,8 +6,8 @@ when_to_use: Trigger phrases like "покажи мои точки/меню", "д
 
 # Managing a QR menu with the owner MCP server
 
-This skill is the operating guide for the `ai-menu-manager` MCP server's 19
-tools (6 read, 13 write). It reuses the server's own tool descriptions and
+This skill is the operating guide for the `ai-menu-manager` MCP server's 18
+tools (6 read, 12 write). It reuses the server's own tool descriptions and
 account-status guidance verbatim rather than re-describing them, so this
 file matches what the server itself tells a client.
 
@@ -39,25 +39,40 @@ needs the `location_id` from `list_locations`).
 | Add a new venue/point | `create_location` | W | `locations:write` |
 | Edit a location's description/hours/contacts | `update_location` | W | `locations:write` |
 | Add an extra menu (e.g. "Lunch", "Drinks") | `create_menu` | W | `menus:write` |
-| Edit a menu's name/description | `update_menu` | W | `menus:write` |
-| Make a menu the location's default | `set_default_menu` | W | `menus:write` |
+| Edit a menu's name/description, show or hide it for guests (`status`) | `update_menu` | W | `menus:write` |
 | Add a category (e.g. "Coffee", "Desserts") | `create_category` | W | `categories:write` |
 | Edit a category's name/description | `update_category` | W | `categories:write` |
 | Add a dish/drink | `create_item` | W | `menu_items:write` |
 | Edit an item's fields | `update_item` | W | `menu_items:write` |
 | Mark in-stock / out-of-stock | `set_item_availability` | W | `menu_items:write` |
-| Change display order of menus/categories/items | `reorder` | W | scope matches the `entity` argument |
+| Change display order of menus/categories/items, or make a menu open first | `reorder` | W | scope matches the `entity` argument |
 
 There is **no delete tool** for any of these resources — every write tool
 in this server declares `destructiveHint:false`. Removing a dish from view
 is `set_item_availability` with
 `out_of_stock: true` (a soft stop-list flag, not a delete). If the user asks
 to "delete" or "remove" something, use the out-of-stock/disable path and say
-so — don't imply data was erased.
+so — don't imply data was erased. For a menu that means hiding it with
+`update_menu` (`status: "draft"` or `"disabled"`); deleting a menu outright
+is done in the console web app, and a location's last menu can't be deleted.
 
-`create_location` atomically creates a default menu for the new location in
-the same call — mention this so the user isn't surprised a "Основное меню"
+`create_location` atomically creates the new location's first menu in the
+same call — mention this so the user isn't surprised a "Основное меню"
 already exists.
+
+Menus are tabs on the location's one public page, in `sort_order`; the
+first tab a guest can see opens first. There is no "default" or "main"
+menu. A guest sees a menu only when `visible_to_guests` is `true` — its
+`status` is `active` **and** it has at least one item (`item_count` > 0). So:
+
+- `create_menu` makes a hidden (`draft`) menu; `slug` is optional — omit it
+  and the server generates one. Add categories and items, then show it with
+  `update_menu` `status: "active"`. Until then its `public_url` won't show it
+  to guests.
+- An `active` menu with no items is still hidden — say so rather than
+  telling the user it's live.
+- To make a menu open first, move it to the top with `reorder`
+  (`entity: "menus"`, the full list of the location's menu ids).
 
 ## 3. Prices: whole KGS as a decimal string, not tyiyn
 
@@ -91,7 +106,8 @@ with the same Russian name.
 
 ## 5. Everything you write is live — confirm before calling a write tool
 
-There is no draft/publish step beyond a menu's own optional `status: draft`.
+There is no draft/publish step beyond a menu's own `status` (a new menu
+starts as `draft`, hidden from guests).
 A price change, a new item, or an availability flip through this server is
 visible on the location's public menu page immediately, to real customers
 (see §6 below for how to get that page's exact link — never construct one
@@ -105,7 +121,7 @@ yourself). Before calling any `W` tool from the table above:
    `category_id`/`item_id` from `get_account_status` and the `list_*` tools
    in this same conversation — don't reuse an id from a much earlier
    session without re-listing, since it may have changed.
-3. `set_default_menu` and `set_item_availability` are idempotent — safe to
+3. `set_item_availability` and `reorder` are idempotent — safe to
    retry if a call times out. `create_*` tools are not; don't blindly retry
    a timed-out create without checking with `list_*` whether it already
    landed.
@@ -122,8 +138,8 @@ yourself). Before calling any `W` tool from the table above:
   Call `get_item` for the full record before describing a dish in detail to
   the user.
 - `list_locations` and `list_menus` (and the `create_location`/
-  `update_location`/`create_menu`/`update_menu`/`set_default_menu` results,
-  which share the same shape) each carry a `public_url` field — the direct
+  `update_location`/`create_menu`/`update_menu` results, which share the
+  same shape) each carry a `public_url` field — the direct
   link to that location's or menu's public page. Return it to the user
   as-is. Never build, edit, or guess this URL yourself, even when the
   pattern looks obvious from one example: if a situation needs a link that
