@@ -94,7 +94,7 @@ mutate anything, none reach outside this server's own catalog.
      -d '{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"search_menu_items","arguments":{"query":"капучино"}}}'
    ```
    Expected: 3 rows named "Капучино" — `180.00` KGS on
-   `demo-ala-too`'s "Бизнес-ланч" menu, `220.00` KGS on both venues' default
+   `demo-ala-too`'s "Бизнес-ланч" menu, `220.00` KGS on both venues'
    "Основное меню". A client asking "cheapest cappuccino in Bishkek" should
    surface the `180.00` row.
 

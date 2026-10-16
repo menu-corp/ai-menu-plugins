@@ -45,6 +45,10 @@ whichever is more convenient; don't treat them as two different answers.
 - `search_menu_items` and `list_venues` have their own result shapes for
   item-level and venue-level browsing respectively — use `fetch` afterward
   if the user wants the surrounding menu, not just the matched row.
+- A venue's menus are tabs on its one public page. `is_default` (in
+  `fetch` metadata and on each of `list_venues`' menus) marks the tab that
+  opens first — the first one guests can see. It is not a "main menu" the
+  café singled out; don't describe the other menus as secondary.
 
 ## Prices are informational only, never a quote
 
@@ -69,5 +73,6 @@ after only one script/spelling attempt.
 
 Only **published** menus appear: a location, menu, or company that is
 inactive, disabled, draft, or deleted never shows up in any of these four
-tools. If nothing comes back, say the venue may not have a menu published
+tools, and neither does a menu with no items or a location with no menu
+to show. If nothing comes back, say the venue may not have a menu published
 right now rather than implying it doesn't exist at all.
