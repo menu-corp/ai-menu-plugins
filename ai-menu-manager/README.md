@@ -28,8 +28,9 @@ Full tool-by-tool guidance lives in
 
 Most of what this plugin does is a **write**: a price change, a new item, or
 a stop-list flip goes out to your public menu page immediately, to real
-customers — there is no draft/review step beyond a menu's own `draft`
-status (a new menu starts hidden until you show it). Granting this plugin
+customers — there is no draft/review step beyond hiding a menu through its
+own status (a new menu goes live as soon as it has an item, unless you hide
+it first). Granting this plugin
 access to your account is granting it permission to change what your
 customers see and pay, not just to read your data. Claude will confirm the
 specific change (which item, old value → new value) before calling a write

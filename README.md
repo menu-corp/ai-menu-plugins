@@ -46,8 +46,9 @@ repository — see that package's own README for the exact command.
 
 Most of what AI Menu Manager does is a write: a price change, a new item,
 or a stop-list flip made through it goes out to the café's public menu page
-immediately — there is no draft or review step beyond a menu's own
-"draft" status (a new menu starts hidden until the owner shows it).
+immediately — there is no draft or review step beyond hiding a menu
+through its own status (a new menu goes live as soon as it has an item,
+unless the owner hides it first).
 Installing this plugin and signing in grants it permission to change what
 a business's customers see and pay, not just to read its data. AI Menu
 Catalog never writes anything; it only reads what a business has already

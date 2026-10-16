@@ -3,7 +3,7 @@
   "name": "ai-menu-manager",
   "displayName": "AI Menu Manager",
   "description": "Manage your Bishkek café's QR menu from an AI assistant: locations, menus, items, prices.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "menu-corp",
     "url": "https://github.com/menu-corp"

@@ -65,10 +65,12 @@ first tab a guest can see opens first. There is no "default" or "main"
 menu. A guest sees a menu only when `visible_to_guests` is `true` — its
 `status` is `active` **and** it has at least one item (`item_count` > 0). So:
 
-- `create_menu` makes a hidden (`draft`) menu; `slug` is optional — omit it
-  and the server generates one. Add categories and items, then show it with
-  `update_menu` `status: "active"`. Until then its `public_url` won't show it
-  to guests.
+- `create_menu` makes an `active` menu; `slug` is optional — omit it and the
+  server generates one. There is no separate "show" step: the menu appears
+  to guests by itself as soon as its first item lands, so say so when
+  confirming that first `create_item`. To fill it out of guests' sight,
+  hide it first with `update_menu` (`status: "disabled"` or `"draft"`) and
+  set it back to `"active"` when it's ready.
 - An `active` menu with no items is still hidden — say so rather than
   telling the user it's live.
 - To make a menu open first, move it to the top with `reorder`
@@ -107,7 +109,7 @@ with the same Russian name.
 ## 5. Everything you write is live — confirm before calling a write tool
 
 There is no draft/publish step beyond a menu's own `status` (a new menu
-starts as `draft`, hidden from guests).
+starts `active` and goes live with its first item unless you hide it first).
 A price change, a new item, or an availability flip through this server is
 visible on the location's public menu page immediately, to real customers
 (see §6 below for how to get that page's exact link — never construct one
