@@ -47,9 +47,14 @@ needs the `location_id` from `list_locations`).
 | Mark in-stock / out-of-stock | `set_item_availability` | W | `menu_items:write` |
 | Change display order of menus/categories/items, or make a menu open first | `reorder` | W | scope matches the `entity` argument |
 
-There is **no delete tool** for any of these resources — every write tool
-in this server declares `destructiveHint:false`. Removing a dish from view
-is `set_item_availability` with
+There is **no delete tool** for any of these resources, but not every write
+is harmless. The five additive tools (`onboard_company` and the four
+`create_*`) declare `destructiveHint:false`. The seven that overwrite a
+stored value — `update_company`, `update_location`, `update_menu`,
+`update_category`, `update_item`, `set_item_availability`, `reorder` —
+declare `destructiveHint:true`, and `update_company`/`update_item` also
+delete the logo/photo they replace. The read tools are `readOnlyHint:true`.
+Removing a dish from view is `set_item_availability` with
 `out_of_stock: true` (a soft stop-list flag, not a delete). If the user asks
 to "delete" or "remove" something, use the out-of-stock/disable path and say
 so — don't imply data was erased. For a menu that means hiding it with
@@ -118,7 +123,9 @@ yourself). Before calling any `W` tool from the table above:
 1. State back to the user exactly what you are about to change (which
    location/menu/category/item, old value → new value, and the price in
    plain "N som" form) and get an explicit go-ahead, unless the user's
-   instruction was already that specific and unambiguous.
+   instruction was already that specific and unambiguous. Your client may
+   also ask the user to approve the seven `destructiveHint:true` tools
+   itself; if they decline, nothing changed — say so, don't retry.
 2. Never guess an id. Resolve `company_id`/`location_id`/`menu_id`/
    `category_id`/`item_id` from `get_account_status` and the `list_*` tools
    in this same conversation — don't reuse an id from a much earlier
